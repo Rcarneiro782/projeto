@@ -72,12 +72,14 @@ class Stage{
       this.log = logObject;
 
     }
+    
     start(){
         this.update();
 
         this.fighter1El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(this.fighter1, this.fighter2) );
         this.fighter2El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(this.fighter2, this.fighter1) );
     }   
+    
     update(){
         //fighter 1
         this.fighter1El.querySelector('.name').innerHTML = `${this.fighter1.name} - ${this.fighter1.life.toFixed(1)} HP  ` ;
@@ -89,6 +91,7 @@ class Stage{
         let f2Pct = (this.fighter2.life / this.fighter2.maxLife)*100;
         this.fighter2El.querySelector('.bar').style.width = `${f2Pct}%`
     }
+    
     doAttack(attacking, attacked){
      if(attacking.life <= 0 || attacked.life <= 0 ){
         this.log.addMessage('Atacando cachorro morto.');
