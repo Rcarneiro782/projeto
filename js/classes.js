@@ -94,7 +94,7 @@ class Stage{
     
     doAttack(attacking, attacked){
      if(attacking.life <= 0 || attacked.life <= 0 ){
-        this.log.addMessage('Atacando cachorro morto.');
+        this.log.addMessage('O guerreiro venceu...');
         return;
      }
 
