@@ -64,11 +64,12 @@ class Character {
 }
 
 class Stage{
-    constructor(fighter1, fighter2, fighter1El, fighter2El ){
+    constructor(fighter1, fighter2, fighter1El, fighter2El, logObject){
       this.fighter1 = fighter1;
       this.fighter2 = fighter2;
       this.fighter1El= fighter1El;
       this.fighter2El = fighter2El;
+      this.log = logObject;
 
     }
     start(){
@@ -90,7 +91,7 @@ class Stage{
     }
     doAttack(attacking, attacked){
      if(attacking.life <= 0 || attacked.life <= 0 ){
-        console.log('Atacando cachorro morto.');
+        this.log.addMessage('Atacando cachorro morto.');
         return;
      }
 
@@ -103,10 +104,10 @@ class Stage{
 
      if(actualAttack > actualDefense){
         attacked.life -= actualAttack;
-        console.log(`${attacking.name} causou ${actualAttack.toFixed(2)} dano em ${attacked.name}`);
+        this.log.addMessage(`${attacking.name} causou ${actualAttack.toFixed(2)} dano em ${attacked.name}`);
      }else{
 
-        console.log(`${attacked.name} conseguiu defender...`)
+        this.log.addMessage(`${attacked.name} conseguiu defender...`)
      }
 
      console.log(actualAttack);
@@ -115,7 +116,27 @@ class Stage{
       this.update();
     }
 }
+class Log{
+    list=[];
 
+    constructor(listEl){
+      this.listEl = listEl;
+    }
+
+    addMessage(msg){
+        this.list.push(msg);
+        this.render();
+    }
+
+    render(){
+        this.listEl.innerHTML = '';
+
+        for( let i in  this.list){
+            this.listEl.innerHTML += `<li>${this.list[i]}</li>`;
+        }
+    }
+    
+}
 
 
 
